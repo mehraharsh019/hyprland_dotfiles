@@ -1,0 +1,185 @@
+// -*- mode: jsonc -*-
+{
+    "layer": "top",
+    "position": "top",
+    "spacing": 8,
+
+
+    "modules-left": [
+        "custom/applications",
+        "clock",
+        "hyprland/workspaces"
+        // "custom/media"
+    ],
+    
+    "modules-center": [
+        "hyprland/window"
+    ],
+
+    "modules-right": [
+        "tray",
+        "custom/clipboard",
+        "pulseaudio",
+        "network",
+        "battery",
+        "custom/powermenu"
+    ],
+
+
+    // Modules configuration
+    "hyprland/workspaces": {
+        "disable-scroll": false,
+        "all-outputs": false,
+        "format": "{icon}",
+        "format-icons": {
+            "urgent": ""
+        },
+        "persistent-workspaces": {
+            "*": 4
+        }
+    },
+
+    "hyprland/window": {
+        "format": "{}",
+        "max-length": 30,
+        "separate-outputs": true,
+        "rewrite": {
+            "(.*) — Mozilla Firefox": "󰈹 $1",
+            "(.*)Mozilla Firefox": "󰈹 Firefox",
+            "(.*) - Visual Studio Code": "󰨞 $1",
+            "(.*)Visual Studio Code": "󰨞 Code",
+            "(.*)Spotify": "󰓇 Spotify",
+            "(.*)Discord": "󰙯 Discord"
+        }
+    },
+
+    "clock": {
+        "interval": 1,
+        "format": " {:%H:%M}",
+        "format-alt": " {:%A, %B %d, %Y}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "format": {
+                "months":   "<span color='#ffead3' font-size='large'><b>{}</b></span>",
+                "days":     "<span color='#ecc6d9' font-size='large'><b>{}</b></span>",
+                "weeks":    "<span color='#99ffdd' font-size='large'><b>W{}</b></span>",
+                "weekdays": "<span color='#ffcc66' font-size='large'><b>{}</b></span>",
+                "today":    "<span color='#ff6699' font-size='large'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-scroll-up": "tz_up",
+            "on-scroll-down": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+
+    "battery": {
+        "interval": 60,
+        "states": {
+            "warning": 30,
+            "critical": 20
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-plugged": "󰚥 {capacity}%",
+        "format-icons": [
+            "󰁺",
+            "󰁻",
+            "󰁼",
+            "󰁽",
+            "󰁾",
+            "󰁿",
+            "󰂀",
+            "󰂁",
+            "󰂂",
+            "󰁹"
+        ],
+        "tooltip-format": "{timeTo}\n{power}W"
+    },
+
+    "network": {
+        "interval": 5,
+        "format-wifi": "󰖩 {signalStrength}%",
+        "format-ethernet": "󰈀",
+        "format-disconnected": "󰖪",
+        "tooltip-format-wifi": "󰖩 {essid} ({signalStrength}%)\n󰇚 {bandwidthDownBits}  󰕒 {bandwidthUpBits}\n󰩠 {ipaddr}",
+        "tooltip-format-ethernet": "{ifname}\n󰩠 {ipaddr}/{cidr}\n󰇚 {bandwidthDownBits}  󰕒 {bandwidthUpBits}",
+        "tooltip-format-disconnected": "Disconnected",
+        "max-length": 20,
+        "on-click": "kitty -e nmtui"
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "󰂯 {volume}%",
+        "format-muted": "󰝟",
+        "format-icons": {
+            "headphone": "󰋋",
+            "hands-free": "󰋎",
+            "headset": "󰋎",
+            "phone": "󰄜",
+            "portable": "󰄜",
+            "car": "󰄋",
+            "default": [
+                "󰕿",
+                "󰖀",
+                "󰕾"
+            ]
+        },
+        "scroll-step": 2,
+        "on-click": "pavucontrol",
+        "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "tooltip-format": "{desc}\n{volume}%",
+        "ignored-sinks": [
+            "Easy Effects Sink"
+        ]
+    },
+
+    "custom/clipboard": {
+        "format": "󱓥",
+        "tooltip": true,
+        "tooltip-format": "Clipboard Manager",
+        "on-click": "nwg-clipman",
+        "on-click-right": "nwg-clipman -clear"
+    },
+
+    "custom/powermenu": {
+        "format": "⏻",
+        "tooltip": true,
+        "tooltip-format": "Power Menu",
+        "on-click": "~/.config/rofi/powermenu/type-1/powermenu.sh"
+    },
+
+    "custom/applications": {
+        "format": "󰀻",
+        "tooltip": true,
+        "tooltip-format": "Applications",
+        "on-click": "~/.config/rofi/launchers/type-1/launcher.sh"
+    },
+    
+    "tray": {
+        "icon-size": 18,
+        "spacing": 8,
+        "show-passive-items": true
+    },
+
+    "custom/media": {
+        "format": "{icon} {}",
+        "escape": true,
+        "return-type": "json",
+        "max-length": 40,
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl stop",
+        "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
+        "on-scroll-up": "playerctl next",
+        "on-scroll-down": "playerctl previous",
+        "exec": "$HOME/.config/waybar/scripts/mediaplayer.py 2> /dev/null"
+    }
+}

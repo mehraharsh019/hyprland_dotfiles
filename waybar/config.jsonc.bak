@@ -1,0 +1,108 @@
+// -*- mode: jsonc -*-
+{
+    "position": "top",
+    // "width": 1920, // 1920px - 30px, 15px padding added to left and right side of bar.
+    "spacing": 5, // Gaps between modules
+
+
+    "modules-left": [
+        "custom/applications",
+        "clock",
+        "tray"
+    ],
+    "modules-center": [
+        "hyprland/workspaces"
+    ],
+    "modules-right": [
+        "custom/clipboard",
+        "pulseaudio",
+        "network",
+        "battery",
+        "custom/powermenu"
+    ],
+
+
+    // Modules configuration
+    "hyprland/workspaces": {
+        "max-length": 6,
+        "disable-scroll": true,
+        "all-outputs": false,
+        "warp-on-scroll": false,
+        "format": "{icon}",
+        "format-icons": {
+            "urgent": ""
+        },
+        "persistent-workspaces": {
+            "*": 4
+        }
+    },
+
+    "clock": {
+        "format": " {:%H:%M}"
+    },
+
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 25,
+            "critical": 10
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "{icon}  {capacity}%",
+        "format-plugged": "{icon}  {capacity}%",
+        "format-icons": ["󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"]
+    },
+
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "󰖩", // " {essid}"
+        "format-ethernet": "󰈀",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        // "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "󰖪",
+        "format-vpn": "󰕾 {ifname} ",
+        // "format-alt": "{essid} {ipaddr}/{cidr} ",
+        "max-length": 15,
+        "on-click": "kitty nmtui"
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "phone-muted": "",
+            "portable": "",
+            "car": "",
+            "default": ["",""]
+        },
+        "scroll-step": 1,
+        "on-click": "pavucontrol",
+        "ignored-sinks": ["Easy Effects Sink"]
+    },
+
+    "custom/clipboard": {
+        "format": "󱓥",
+        "on-click": "nwg-clipman"
+    },
+
+    "custom/powermenu": {
+        "format": "",
+        "on-click": "~/.config/rofi/powermenu/type-1/powermenu.sh"
+    },
+
+    "custom/applications": {
+        "format": " Apps", // EndeavourOS logo (Nerd Font)
+        "on-click": "~/.config/rofi/launchers/type-1/launcher.sh"
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 5
+    }
+
+}

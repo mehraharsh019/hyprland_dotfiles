@@ -1,0 +1,92 @@
+@define-color bg_primary #643921;
+@define-color bg_hover_start #ffd479;
+@define-color bg_hover_end #fab339;
+@define-color bg_workspace_inactive rgba(255, 255, 255, 0.08);
+@define-color bg_workspace_urgent rgba(255, 255, 255, 0.7);
+@define-color text_primary #ffffff;
+@define-color text_secondary #fab339;
+@define-color text_hover #643921;
+@define-color text_urgent rgb(255, 105, 97);
+@define-color text_blink #000000;
+@define-color border_color #fab339;
+@define-color shadow_hover rgba(250, 179, 57, 0.25);
+
+* {
+   font-family: JetBrains Mono Nerd Font Propo SemiBold, CaskaydiaCove Nerd Font Propo, Caskaydia, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+   font-size: 18px;
+   border-radius: 20px;
+}
+
+window#waybar {
+   background-color: transparent;
+   color: @text_primary;
+}
+
+button {
+   background-color: inherit;
+   box-shadow: inset 0 -1px transparent;
+}
+
+button:hover,
+#workspaces button:hover {
+   color: @text_hover;
+   background: linear-gradient(90deg, @bg_hover_start 0%, @bg_hover_end 100%);
+   box-shadow: 0 2px 8px @shadow_hover;
+   transition: background 0.3s, box-shadow 0.3s;
+}
+
+#clock,
+#battery,
+#network,
+#pulseaudio,
+#workspaces,
+#window,
+#workspaces,
+#custom-clipboard,
+#custom-powermenu,
+#custom-applications,
+#tray {
+   margin-top: 10px;
+   padding: 0px 15px;
+   background-color: @bg_primary;
+   color: @text_secondary;
+   border: 3px solid @border_color;
+}
+
+#workspaces {
+   padding: 3px 5px;
+   margin-top: 10px;
+}
+
+#workspaces button {
+   background-color: @bg_workspace_inactive;
+   min-height: 20px;
+   min-width: 20px;
+   margin: 3px 4px;
+   padding: 2px 4px;
+   color: inherit;
+   transition: all 250ms ease-in-out;
+}
+
+#workspaces button.active {
+   background-color: @text_secondary;
+   color: @text_hover;
+   min-width: 40px;
+   transition: all 250ms ease-in-out;
+}
+
+
+#workspaces button.urgent {
+   animation: blink 1s infinite;
+}
+
+@keyframes blink {
+   to {
+      background-color: @bg_primary;
+      color: @text_urgent;
+   }
+}
+
+label:focus {
+   background-color: @text_blink;
+}

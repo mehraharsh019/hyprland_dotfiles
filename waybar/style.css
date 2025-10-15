@@ -1,0 +1,171 @@
+@define-color bg_primary #211F2D;
+@define-color bg_secondary #413E50;
+@define-color accent #EBBCBA;
+@define-color text_primary #ffffff;
+@define-color text_secondary rgba(255, 255, 255, 0.85);
+@define-color button_hover alpha(@accent, 0.3);
+@define-color warning #ff6961;
+@define-color success #a6e3a1;
+
+* {
+    font-family: JetBrains Mono Nerd Font Propo SemiBold, CaskaydiaCove Nerd Font Propo, Caskaydia, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+window#waybar {
+    background-color: alpha(@bg_primary, 0.3);
+    color: @text_primary;
+    transition-property: background-color;
+    transition-duration: 0.5s;
+}
+
+button {
+    box-shadow: none;
+    border-radius: 6px;
+}
+
+button:hover {
+    color: @bg_primary;
+    background-color: @accent;
+    transition: all 0.3s ease;
+}
+
+#clock,
+#battery,
+#network,
+#pulseaudio,
+#workspaces,
+#custom-clipboard,
+#custom-powermenu,
+#custom-applications,
+#tray,
+#window,
+#taskbar,
+#mpd,
+#custom-media {
+    padding: 2px 12px;
+    background-color: @bg_primary;
+    color: @accent;
+    border: 2px solid @accent;
+    border-radius: 8px;
+}
+
+#window {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.modules-left {
+    margin: 10px;
+}
+
+.modules-right {
+    margin: 10px;
+}
+
+.modules-center {
+    margin: 10px;
+}
+
+#workspaces {
+    padding: 2px 4px;
+}
+
+#workspaces button {
+    background-color: @bg_secondary;
+    color: @accent;
+    padding: 1px 8px;
+    margin: 2px 3px;
+    transition: all 0.25s ease-in-out;
+    border: none;
+}
+
+#workspaces button:hover {
+    background-color: @button_hover;
+    color: @accent;
+}
+
+#workspaces button.active {
+    background-color: @accent;
+    color: @bg_primary;
+    font-weight: bold;
+    min-width: 40px;
+}
+
+#workspaces button.urgent {
+    color: @warning;
+    animation: urgent-fade 1.2s ease-in-out infinite;
+}
+
+#taskbar {
+    padding: 2px 8px;
+}
+
+#taskbar button {
+    color: @accent;
+    padding: 2px 8px;
+    margin: 2px 2px;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+    border: none;
+}
+
+#taskbar button:hover {
+    background-color: @button_hover;
+    color: @accent;
+}
+
+#taskbar button.active {
+    background-color: @button_active;
+    color: @bg_primary;
+    font-weight: bold;
+}
+
+#taskbar button.urgent {
+    background-color: rgba(255, 105, 97, 0.3);
+    color: #ff6961;
+    animation: urgent-fade 1.2s ease-in-out infinite;
+}
+
+@keyframes urgent-fade {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+#battery.charging {
+    color: @success;
+}
+
+#battery.warning:not(.charging) {
+    color: @accent;
+}
+
+#battery.critical:not(.charging) {
+    color: @warning;
+    font-weight: bold;
+}
+
+#pulseaudio.muted,
+#network.disconnected {
+    color: @warning;
+}
+
+tooltip {
+    background-color: @bg_primary;
+    color: @text_primary;
+    border: 2px solid @accent;
+}
+
+tooltip label {
+    color: @text_primary;
+    padding: 4px;
+}

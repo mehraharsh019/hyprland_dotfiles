@@ -1,0 +1,8 @@
+/* matugen.css */
+:root {
+  --color-primary: #643921;
+  --color-accent: #fab339;
+  --color-urgent: rgb(203, 21, 21);
+  --color-background: transparent;
+  --color-foreground: #ffffff;
+}
